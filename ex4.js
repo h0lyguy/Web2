@@ -18,7 +18,14 @@ var server = http.createServer(function(req, res) {
 var io = require('socket.io').listen(server);
 var cpt=1;
 io.sockets.on('connection', function (socket) {
-	console.log("Nombre de connexions : "+cpt++);
-    console.log('Nouvelle connexion.');
+	console.log('Nouvelle connexion.');
+	socket.emit('connection',cpt++);
+	console.log(cpt);
+	socket.on('disconnect',function(){
+		console.log('Deconnexion d\'un client');
+		cpt--;
+	});
 });
+
+
 server.listen(8080);
