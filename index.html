@@ -15,13 +15,16 @@
     <body>
 
         <h1>Communication avec socket.io !</h1>
+		<p id="nb_connexion">Nombre de clients connectés :</p>
 
 
         <script src="/socket.io/socket.io.js"></script>
 
         <script>
-
-            var socket = io.connect('http://localhost:8080');
+			var socket = io.connect('http://localhost:8080');
+			socket.on('connection',function(cpt){
+				document.getElementById("nb_connexion").innerHTML="Nombre de clients connectés :"+cpt;
+			});
 
         </script>
 
